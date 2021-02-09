@@ -1,0 +1,17 @@
+<nav class="blue darken-1">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo" style="margin-left: 10px;">Article Manager</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {{#if isIndex}}
+            <li class="active"><a href="/">Articles</a></li>
+        {{else}}
+            <li ><a href="/">Articles</a></li>
+        {{/if}}
+        {{#if isCreate}}
+            <li class="active"><a href="/create">Create Article</a></li>
+        {{else}}
+            <li><a href="/create">Create Article</a></li>
+        {{/if}}
+      </ul>
+    </div>
+  </nav>

@@ -1,0 +1,86 @@
+<h2>News page </h2>
+{{#if articles.length}}
+<table id="myTable">
+    <tr>
+        <th onclick="sortTable(0)" >#</th>
+        <th onclick="sortTable(1)">title</th>
+        <th onclick="sortTable(2)">Message</th>
+        <th onclick="sortTable(3)">Status</th>
+        <th onclick="sortTable(4)">Date</th>
+    </tr>
+    {{#each articles}}
+    <tr>
+        <form action="/complete" method="POST">
+            <label>
+            {{#if completed}}
+            <td>
+              <input type="hidden" name="filename" value="{{fileName}}" checked>
+              <input type="hidden" value="{{_id}}" name="id">
+              <strike>{{number}}</strike>
+             </td>                                       
+            <td><strike>{{title}}</strike></td>
+            <td><strike>{{message}}</strike></td>
+            <td><strike>{{status}}</strike></td>
+            <td><strike>{{date}}</strike></td>
+            {{else}}
+               <td>
+                 <input type="hidden" name="filename" value="{{fileName}}">
+                 <input type="hidden" value="{{_id}}" name="id">
+               {{number}}
+               </td>              
+               <td>{{title}}</td>
+               <td>{{message}}</td>
+               <td>{{status}}</td>
+               <td>{{date}}</td>              
+            {{/if}}
+            <td>
+              <button style="float: right;" name="download" class="btn btn-small" type="submit">Download file</button> 
+              <button style="float: right;" name="save" class="btn btn-small" type="submit">Save</button>
+            </td> 
+        </label>
+        </form>
+    </tr>
+    {{/each}}
+</table>
+{{else}}
+<p>No fresh articles</p>
+{{/if}}
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {      
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+

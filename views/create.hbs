@@ -1,0 +1,37 @@
+
+<form action="/create" method="POST" enctype="multipart/form-data">
+    <h2>Create article</h2>
+   
+    <div class="input-field">
+        <input type="text" name="title" required placeholder="Article name" >
+    </div>
+    <div class="input-field">
+        <textarea type="text" name="message"  required placeholder="Article description"
+        style="resize:vertical;
+        min-height:150px"
+        ></textarea>
+    </div>
+    <p>
+        <label>
+            <input name="status_order" id="shipped" type="radio"  value="Shipped" checked />
+        <span>Shipped</span>
+        </label>
+    </p>
+    <p>
+        <label>
+            <input name="status_order" id="cancelled" type="radio" value="Cancelled" />
+        <span>Cancelled</span>
+        </label>
+    </p>
+    <div>
+        <input type="date" class="datepicker" max="2022-01-09"  name="date" required >
+    </div>
+    <div style="margin-top: 15px;">
+        <label>
+            <input id="my-file-selector" type="file"   name="filedata">
+        
+        </label>
+    </div>
+    
+    <button type="submit" class="btn" style="margin-top:20px;">Create</button>
+</form>
